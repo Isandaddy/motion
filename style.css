@@ -99,3 +99,8 @@ body {
 .pop-up_hide {
   display: none;
 }
+
+.add-btn {
+  background-color: var(--accent-color);
+  width: 40px;
+}

@@ -2,20 +2,49 @@ interface PopUp {
     viewPopup(title: string): void;
 }
 
-type PopUpType = {
+type PopUpLabelType = {
     title: string;
-    url?: string;
-    body?: string;
 }
+const popupSection = document.querySelector('.pop-up');
+const popupCloseBtn = document.querySelector('.pop-up_close-btn');
+popupCloseBtn?.addEventListener('click', () => closePopup());
 
-export class ImagePopUp implements PopUp{
+function closePopup(): void {
+    popupSection?.classList.add('pop-up_hide');
+}
+export class PopupMaker implements PopUp{
     constructor() {}
-    popupSection = document.querySelector('.pop-up');
-    popupCloseBtn = document.querySelector('.pop-up_close-btn');
+    //popupSection = document.querySelector('.pop-up');
+    //popupCloseBtn = document.querySelector('.pop-up_close-btn');
+    popupBodyLabel = document.querySelector('.pop-up_body-label');
     
+    
+    //popupCloseBtn.addEventListener('click', () => console.log());
+
     viewPopup(title: string) {
-        if(!(title === 'IMAGE')) console.log('not Image Btn');
+        switch(title) {
+            case 'IMAGE' :
+                this.changeText('URL');
+                break;
+            case 'VIDEO' :
+                this.changeText('URL');
+                break;   
+            case 'NOTE' :
+                this.changeText('BODY');
+                break;   
+                case 'TASK' :
+            this.changeText('BODY');
+            break;       
+        }
+
+        popupSection?.classList.remove('pop-up_hide');
+    }
+
+    changeText(bodyText: string): void {
         
-        this.popupSection?.classList.remove('pop-up_hide');
+        if(this.popupBodyLabel) {
+            this.popupBodyLabel.innerHTML = bodyText;
+        }
     }
 }
+
