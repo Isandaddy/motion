@@ -100,7 +100,7 @@ body {
   display: none;
 }
 
-.add-btn {
+.pop-up_add-btn {
   background-color: var(--accent-color);
   width: 40px;
 }

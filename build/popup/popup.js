@@ -1,16 +1,27 @@
+import Card from '../card/card.js';
+var card = new Card();
 var popupSection = document.querySelector('.pop-up');
+var popupTitle = document.querySelector('.pop-up_title');
+var popupBody = document.querySelector('.pop-up_body');
+var popupAddBtn = document.querySelector('.pop-up_add-btn');
 var popupCloseBtn = document.querySelector('.pop-up_close-btn');
+var popupTitleValue = '';
+var popupBodyValue = '';
+popupTitle === null || popupTitle === void 0 ? void 0 : popupTitle.addEventListener('change', function (e) { return popupTitleValue = e.target.value; });
 popupCloseBtn === null || popupCloseBtn === void 0 ? void 0 : popupCloseBtn.addEventListener('click', function () { return closePopup(); });
+popupAddBtn === null || popupAddBtn === void 0 ? void 0 : popupAddBtn.addEventListener('click', function (e) {
+    e.preventDefault();
+    console.log(popupTitleValue);
+    card.createCard(popupTitleValue, popupBodyValue);
+    closePopup();
+});
 function closePopup() {
     popupSection === null || popupSection === void 0 ? void 0 : popupSection.classList.add('pop-up_hide');
 }
 var PopupMaker = /** @class */ (function () {
     function PopupMaker() {
-        //popupSection = document.querySelector('.pop-up');
-        //popupCloseBtn = document.querySelector('.pop-up_close-btn');
         this.popupBodyLabel = document.querySelector('.pop-up_body-label');
     }
-    //popupCloseBtn.addEventListener('click', () => console.log());
     PopupMaker.prototype.viewPopup = function (title) {
         switch (title) {
             case 'IMAGE':

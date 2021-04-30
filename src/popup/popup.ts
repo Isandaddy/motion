@@ -1,3 +1,5 @@
+import Card from '../card/card.js';
+
 interface PopUp {
     viewPopup(title: string): void;
 }
@@ -5,21 +7,36 @@ interface PopUp {
 type PopUpLabelType = {
     title: string;
 }
+
+const card = new Card();
+
 const popupSection = document.querySelector('.pop-up');
+const popupTitle = document.querySelector('.pop-up_title');
+const popupBody = document.querySelector('.pop-up_body');
+const popupAddBtn = document.querySelector('.pop-up_add-btn');
 const popupCloseBtn = document.querySelector('.pop-up_close-btn');
+
+let popupTitleValue = '';
+let popupBodyValue = '';
+
+popupTitle?.addEventListener('change', (e: any) => popupTitleValue = e.target.value);
+
 popupCloseBtn?.addEventListener('click', () => closePopup());
+popupAddBtn?.addEventListener('click',(e) => {
+    e.preventDefault();
+    console.log(popupTitleValue);
+    card.createCard(popupTitleValue, popupBodyValue);
+    closePopup();
+});
+
 
 function closePopup(): void {
     popupSection?.classList.add('pop-up_hide');
 }
+
 export class PopupMaker implements PopUp{
     constructor() {}
-    //popupSection = document.querySelector('.pop-up');
-    //popupCloseBtn = document.querySelector('.pop-up_close-btn');
     popupBodyLabel = document.querySelector('.pop-up_body-label');
-    
-    
-    //popupCloseBtn.addEventListener('click', () => console.log());
 
     viewPopup(title: string) {
         switch(title) {
@@ -32,15 +49,15 @@ export class PopupMaker implements PopUp{
             case 'NOTE' :
                 this.changeText('BODY');
                 break;   
-                case 'TASK' :
-            this.changeText('BODY');
-            break;       
+            case 'TASK' :
+                this.changeText('BODY');
+                break;       
         }
 
         popupSection?.classList.remove('pop-up_hide');
     }
 
-    changeText(bodyText: string): void {
+    private changeText(bodyText: string): void {
         
         if(this.popupBodyLabel) {
             this.popupBodyLabel.innerHTML = bodyText;
