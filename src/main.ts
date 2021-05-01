@@ -6,7 +6,7 @@ const videoButton = document.querySelector('.video-btn');
 const noteButton = document.querySelector('.note-btn');
 const taskButton = document.querySelector('.task-btn');
 
-const popup = new PopupMaker();
+const popup = PopupMaker.makePopUp();
 
 imageButton?.addEventListener('click', (e) => popup.viewPopup(outputValue(e)));
 videoButton?.addEventListener('click', (e) => popup.viewPopup(outputValue(e)));

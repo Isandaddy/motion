@@ -8,7 +8,7 @@ type PopUpLabelType = {
     title: string;
 }
 
-const card = new Card();
+const card = Card.makeCard();
 
 const popupSection = document.querySelector('.pop-up');
 const popupTitle = document.querySelector('.pop-up_title');
@@ -20,6 +20,7 @@ let popupTitleValue = '';
 let popupBodyValue = '';
 
 popupTitle?.addEventListener('change', (e: any) => popupTitleValue = e.target.value);
+popupBody?.addEventListener('change', (e: any) => popupBodyValue = e.target.value);
 
 popupCloseBtn?.addEventListener('click', () => closePopup());
 popupAddBtn?.addEventListener('click',(e) => {
@@ -35,7 +36,12 @@ function closePopup(): void {
 }
 
 export class PopupMaker implements PopUp{
-    constructor() {}
+    private constructor() {}
+
+    static makePopUp() {
+        return new PopupMaker();
+    }
+
     popupBodyLabel = document.querySelector('.pop-up_body-label');
 
     viewPopup(title: string) {
