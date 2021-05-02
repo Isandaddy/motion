@@ -59,7 +59,6 @@ export class PopupMaker implements PopUp{
                 this.changeText('BODY');
                 break;       
         }
-
         popupSection?.classList.remove('pop-up_hide');
     }
 
