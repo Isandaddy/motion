@@ -1,6 +1,6 @@
-import Card from '../card/card.js';
+import { CardMaker } from '../card/card.js';
 
-interface PopUp {
+export interface PopUp {
     viewPopup(title: string): void;
 }
 
@@ -8,39 +8,23 @@ type PopUpLabelType = {
     title: string;
 }
 
-const card = Card.makeCard();
+const card = CardMaker.makeCard();
 
-const popupSection = document.querySelector('.pop-up');
-const popupTitle = document.querySelector('.pop-up_title');
-const popupBody = document.querySelector('.pop-up_body');
-const popupAddBtn = document.querySelector('.pop-up_add-btn');
-const popupCloseBtn = document.querySelector('.pop-up_close-btn');
-
-let popupTitleValue = '';
-let popupBodyValue = '';
-
-popupTitle?.addEventListener('change', (e: any) => popupTitleValue = e.target.value);
-popupBody?.addEventListener('change', (e: any) => popupBodyValue = e.target.value);
-
-popupCloseBtn?.addEventListener('click', () => closePopup());
-popupAddBtn?.addEventListener('click',(e) => {
-    e.preventDefault();
-    console.log(popupTitleValue);
-    card.createCard(popupTitleValue, popupBodyValue);
-    closePopup();
-});
-
-
-function closePopup(): void {
-    popupSection?.classList.add('pop-up_hide');
-}
-
-export class PopupMaker implements PopUp{
+export class PopupMaker implements PopUp {
     private constructor() {}
 
     static makePopUp() {
         return new PopupMaker();
     }
+
+    popupSection = document.querySelector('.pop-up');
+    popupTitle = document.querySelector('.pop-up_title');
+    popupBody = document.querySelector('.pop-up_body');
+    popupAddBtn = document.querySelector('.pop-up_add-btn'); 
+    popupCloseBtn = document.querySelector('.pop-up_close-btn');
+
+    popupTitleValue = '';
+    popupBodyValue = '';
 
     popupBodyLabel = document.querySelector('.pop-up_body-label');
 
@@ -59,7 +43,22 @@ export class PopupMaker implements PopUp{
                 this.changeText('BODY');
                 break;       
         }
-        popupSection?.classList.remove('pop-up_hide');
+        this.popupSection?.classList.remove('pop-up_hide');
+
+        this.popupTitle?.addEventListener('change', (e: any) => this.popupTitleValue = e.target.value);
+        this.popupBody?.addEventListener('change', (e: any) => this.popupBodyValue = e.target.value);
+        
+        this.popupCloseBtn?.addEventListener('click', () => this.closePopup());
+        this.popupAddBtn?.addEventListener('click',(e) => {
+            e.preventDefault();
+            card.deliverDescription(this.popupTitleValue, this.popupBodyValue);
+            this.closePopup();
+        });
+
+    }
+
+    private closePopup(): void {
+        this.popupSection?.classList.add('pop-up_hide');
     }
 
     private changeText(bodyText: string): void {

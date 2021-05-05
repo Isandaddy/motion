@@ -1,12 +1,12 @@
 
-import { PopupMaker } from "./popup/popup.js";
+import { PopUp, PopupMaker } from "./popup/popup.js";
 
 const imageButton = document.querySelector('.image-btn');
 const videoButton = document.querySelector('.video-btn');
 const noteButton = document.querySelector('.note-btn');
 const taskButton = document.querySelector('.task-btn');
 
-const popup = PopupMaker.makePopUp();
+const popup: PopUp = PopupMaker.makePopUp();
 
 imageButton?.addEventListener('click', (e) => popup.viewPopup(outputValue(e)));
 videoButton?.addEventListener('click', (e) => popup.viewPopup(outputValue(e)));
