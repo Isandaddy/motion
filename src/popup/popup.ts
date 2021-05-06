@@ -28,20 +28,28 @@ export class PopupMaker implements PopUp {
 
     popupBodyLabel = document.querySelector('.pop-up_body-label');
 
+    currentPopUp = '';
+
     viewPopup(title: string) {
         switch(title) {
             case 'IMAGE' :
+                this.currentPopUp = title;
                 this.changeText('URL');
                 break;
             case 'VIDEO' :
+                this.currentPopUp = title;
                 this.changeText('URL');
                 break;   
             case 'NOTE' :
+                this.currentPopUp = title;
                 this.changeText('BODY');
                 break;   
             case 'TASK' :
+                this.currentPopUp = title;
                 this.changeText('BODY');
-                break;       
+                break;
+            default :
+                throw new Error(`${title} is not title`);           
         }
         this.popupSection?.classList.remove('pop-up_hide');
 
@@ -51,13 +59,16 @@ export class PopupMaker implements PopUp {
         this.popupCloseBtn?.addEventListener('click', () => this.closePopup());
         this.popupAddBtn?.addEventListener('click',(e) => {
             e.preventDefault();
-            card.deliverDescription(this.popupTitleValue, this.popupBodyValue);
+            card.deliverDescription(card, this.currentPopUp, this.popupTitleValue, this.popupBodyValue);
             this.closePopup();
         });
 
     }
 
     private closePopup(): void {
+  
+        this.popupTitle instanceof HTMLInputElement ? this.popupTitle.value = '' : '';
+        this.popupBody instanceof HTMLInputElement ? this.popupBody.value = '' : '';
         this.popupSection?.classList.add('pop-up_hide');
     }
 

@@ -10,6 +10,7 @@ var PopupMaker = /** @class */ (function () {
         this.popupTitleValue = '';
         this.popupBodyValue = '';
         this.popupBodyLabel = document.querySelector('.pop-up_body-label');
+        this.currentPopUp = '';
     }
     PopupMaker.makePopUp = function () {
         return new PopupMaker();
@@ -19,17 +20,23 @@ var PopupMaker = /** @class */ (function () {
         var _a, _b, _c, _d, _e;
         switch (title) {
             case 'IMAGE':
+                this.currentPopUp = title;
                 this.changeText('URL');
                 break;
             case 'VIDEO':
+                this.currentPopUp = title;
                 this.changeText('URL');
                 break;
             case 'NOTE':
+                this.currentPopUp = title;
                 this.changeText('BODY');
                 break;
             case 'TASK':
+                this.currentPopUp = title;
                 this.changeText('BODY');
                 break;
+            default:
+                throw new Error(title + " is not title");
         }
         (_a = this.popupSection) === null || _a === void 0 ? void 0 : _a.classList.remove('pop-up_hide');
         (_b = this.popupTitle) === null || _b === void 0 ? void 0 : _b.addEventListener('change', function (e) { return _this.popupTitleValue = e.target.value; });
@@ -37,12 +44,14 @@ var PopupMaker = /** @class */ (function () {
         (_d = this.popupCloseBtn) === null || _d === void 0 ? void 0 : _d.addEventListener('click', function () { return _this.closePopup(); });
         (_e = this.popupAddBtn) === null || _e === void 0 ? void 0 : _e.addEventListener('click', function (e) {
             e.preventDefault();
-            card.deliverDescription(_this.popupTitleValue, _this.popupBodyValue);
+            card.deliverDescription(card, _this.currentPopUp, _this.popupTitleValue, _this.popupBodyValue);
             _this.closePopup();
         });
     };
     PopupMaker.prototype.closePopup = function () {
         var _a;
+        this.popupTitle instanceof HTMLInputElement ? this.popupTitle.value = '' : '';
+        this.popupBody instanceof HTMLInputElement ? this.popupBody.value = '' : '';
         (_a = this.popupSection) === null || _a === void 0 ? void 0 : _a.classList.add('pop-up_hide');
     };
     PopupMaker.prototype.changeText = function (bodyText) {
