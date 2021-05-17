@@ -4,33 +4,27 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MOTION</title>
-    <link rel="stylesheet" href="style.css" />
+    <title>Motion</title>
+    <link rel="stylesheet" href="./style/style.css">
+    <script src="./dist/app.js" type="module" defer></script>
 </head>
 <body>
-    <script type="module" src="./build/main.js"></script>
-    <section class="main">
-        <header class="header">
-            <h1>MOTION</h1>
-            <input type="button" class="header-btn image-btn" value="IMAGE"></input>
-            <input type="button" class="header-btn video-btn" value='VIDEO'></input>
-            <input type="button" class="header-btn note-btn" value="NOTE"></input>
-            <input type="button" class="header-btn task-btn" value="TASK"></input>
+    <div class="app">
+        <header class="banner">
+            <h1 class="banner__title">Motion</h1>
+            <ul class="control-panel">
+                <li id="new-image" class="create-button">Image</li>
+                <li id="new-video" class="create-button">Video</li>
+                <li id="new-note" class="create-button">Note</li>
+                <li id="new-todo" class="create-button">Todo</li>
+            </ul>
         </header>
-        <section class="section">
-            
-        </section>
-        <footer class="footer">Copyright</footer>
-    </section>
-    <section class="pop-up pop-up_hide">
-        <span class="pop-up_close-btn">x</span>
-        <form class="pop-up_form" action="#">
-            <label for="title">Title</label> 
-            <input class="pop-up_title" type="text" name="title" id="title">
-            <label class="pop-up_body-label" for="pop-up_body"></label> 
-            <input class="pop-up_body" type="text" name="body" id="pop-up_body">
-            <input class="pop-up_add-btn" type="button" value="ADD">
-        </form>
-    </section>
+        <main class="document">
+
+        </main>
+        <footer class="footer">
+            <p>Copyright by Dream Coding Academy.</p>
+        </footer>
+    </div>
 </body>
 </html>
