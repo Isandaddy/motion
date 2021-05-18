@@ -57,6 +57,7 @@ p {
 .banner {
   background: var(--bg-main-color);
   border-bottom: 1px solid var(--bg-accent-color);
+  text-align: center;
 }
 
 .banner__title {
