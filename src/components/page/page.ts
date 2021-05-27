@@ -26,7 +26,6 @@ export class PageItemComponent extends BaseComponent<HTMLElement> implements Sec
                 </li>`);
         const closeBtn = this.element.querySelector('.close')! as HTMLButtonElement;   
             closeBtn.onclick = () => {
-                console.log(this.element);
                 this.closeListner && this.closeListner();
             };
     }
